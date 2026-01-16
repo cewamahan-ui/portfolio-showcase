@@ -9,7 +9,7 @@ function ProjectCard({ project, onDelete }) {
           className="delete-btn"
           onClick={() => onDelete(project.id)}
           title="Delete project"
-          aria-label={Delete }
+          aria-label={`Delete ${project.title}`}
         >
           
         </button>
