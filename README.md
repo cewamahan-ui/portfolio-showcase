@@ -55,17 +55,6 @@ App (State Management)
      ProjectCard[] (Individual project cards)
 ```
 
-## State Management
-
-The application uses React's `useState` hook for state management:
-
-- **projects**: Array of project objects with id, title, and description
-- **searchTerm**: String to filter projects by search query
-
-All state is managed in the App component and passed down to child components via props.
-
-## Getting Started
-
 ### Prerequisites
 
 - Node.js (v16 or higher)
