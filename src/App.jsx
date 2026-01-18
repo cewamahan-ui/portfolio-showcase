@@ -1,4 +1,4 @@
-﻿import { useState } from 'react';
+import { useState } from 'react';
 import './App.css';
 import ProjectForm from './components/ProjectForm';
 import ProjectList from './components/ProjectList';
@@ -10,37 +10,56 @@ function App() {
       id: 1,
       title: 'Project 1',
       description: 'Description of the project',
+      completed: false,
+      isPending: false,
     },
     {
       id: 2,
       title: 'Project 2',
       description: 'Description of the project',
+      completed: false,
+      isPending: false,
     },
     {
       id: 3,
       title: 'Project 3',
       description: 'Description of the project',
+      completed: false,
+      isPending: false,
     },
   ]);
 
   const [searchTerm, setSearchTerm] = useState('');
 
-  // Filter projects based on search term
   const filteredProjects = projects.filter((project) =>
     project.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
     project.description.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
-  // Handle adding a new project
   const handleAddProject = (newProject) => {
     const project = {
       id: Date.now(),
       ...newProject,
+      completed: false,
+      isPending: true,
     };
     setProjects([...projects, project]);
+    
+    setTimeout(() => {
+      setProjects((prev) =>
+        prev.map((p) => (p.id === project.id ? { ...p, isPending: false } : p))
+      );
+    }, 2000);
   };
 
-  // Handle deleting a project
+  const handleToggleComplete = (id) => {
+    setProjects(
+      projects.map((project) =>
+        project.id === id ? { ...project, completed: !project.completed } : project
+      )
+    );
+  };
+
   const handleDeleteProject = (id) => {
     setProjects(projects.filter((project) => project.id !== id));
   };
@@ -67,6 +86,7 @@ function App() {
           <ProjectList
             projects={filteredProjects}
             onDeleteProject={handleDeleteProject}
+            onToggleComplete={handleToggleComplete}
           />
         </section>
       </main>

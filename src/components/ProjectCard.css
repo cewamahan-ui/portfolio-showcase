@@ -5,6 +5,9 @@
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
   border: 1px solid #e0e0e0;
   transition: all 0.3s ease;
+  position: relative;
+  display: flex;
+  flex-direction: column;
 }
 
 .project-card:hover {
@@ -12,40 +15,119 @@
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.12);
 }
 
+.project-card.completed {
+  background: #f9fafb;
+  border-color: #d1fae5;
+}
+
+.project-card.completed .project-description {
+  opacity: 0.6;
+  text-decoration: line-through;
+}
+
+.project-card.pending {
+  opacity: 0.7;
+}
+
+.pending-indicator {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  background: #fbbf24;
+  color: #78350f;
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
 .project-card-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  gap: 1rem;
   margin-bottom: 1rem;
 }
 
 .project-card-header h3 {
   color: #333;
   font-size: 1.25rem;
+  margin: 0;
 }
 
-.delete-btn {
-  background: none;
-  border: none;
-  color: #999;
-  cursor: pointer;
-  padding: 0.25rem;
-  transition: all 0.3s ease;
-}
-
-.delete-btn:hover {
-  color: #e74c3c;
+.project-card.completed .project-card-header h3 {
+  color: #888;
 }
 
 .project-description {
   color: #666;
   line-height: 1.6;
-  margin: 0;
+  margin: 0 0 1rem 0;
+  transition: all 0.3s ease;
+  flex-grow: 1;
+}
+
+.project-card-actions {
+  display: flex;
+  gap: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid #f0f0f0;
+}
+
+.done-btn {
+  background: none;
+  border: none;
+  color: #10b981;
+  cursor: pointer;
+  padding: 0.5rem 0;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  font-size: 14px;
+  flex: 1;
+  text-align: left;
+}
+
+.done-btn:hover {
+  color: #059669;
+  transform: scale(1.05);
+}
+
+.project-card.completed .done-btn {
+  color: #10b981;
+}
+
+.delete-btn {
+  background: none;
+  border: none;
+  color: #ef4444;
+  cursor: pointer;
+  padding: 0.5rem 0;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  font-size: 14px;
+  flex: 1;
+  text-align: right;
+}
+
+.delete-btn:hover {
+  color: #dc2626;
+  transform: scale(1.05);
 }
 
 @media (max-width: 480px) {
   .project-card {
     padding: 1.25rem;
+  }
+  
+  .project-card-actions {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  .done-btn,
+  .delete-btn {
+    text-align: center;
   }
 }

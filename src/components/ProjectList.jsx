@@ -1,7 +1,7 @@
-﻿import ProjectCard from './ProjectCard';
+import ProjectCard from './ProjectCard';
 import './ProjectList.css';
 
-function ProjectList({ projects, onDeleteProject }) {
+function ProjectList({ projects, onDeleteProject, onToggleComplete }) {
   if (projects.length === 0) {
     return (
       <div className="empty-state">
@@ -17,6 +17,7 @@ function ProjectList({ projects, onDeleteProject }) {
           key={project.id}
           project={project}
           onDelete={onDeleteProject}
+          onToggleComplete={onToggleComplete}
         />
       ))}
     </div>
